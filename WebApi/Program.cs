@@ -34,7 +34,7 @@ namespace Notes.WebApi
                 var serviceProvider = scope.ServiceProvider;
                 try
                 {
-                    var context = serviceProvider.GetRequiredService<IApplicationDbContext>();
+                    var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
@@ -42,11 +42,6 @@ namespace Notes.WebApi
                     Console.WriteLine(ex);
                 }
             }
-
-
-
-
-
 
             if (app.Environment.IsDevelopment())
             {

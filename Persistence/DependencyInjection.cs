@@ -5,21 +5,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
 {
     public static class DependencyInjection
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services,
-    IConfiguration configuration)
+            IConfiguration configuration)
         {
             var connectionString = configuration["DbConnection"];
-            services.AddDbContext<MaterialsDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseNpgsql(connectionString);
             });
-            services.AddScoped<IMaterialsDbContext>(provider =>
-                provider.GetService<MaterialsDbContext>());
+            services.AddScoped<IApplicationDbContext>(provider =>
+                provider.GetService<ApplicationDbContext>());
             return services;
         }
     }
