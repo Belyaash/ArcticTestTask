@@ -16,9 +16,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Materials\Commands\" />
-    <Folder Include="Materials\Queries\" />
-  </ItemGroup>
-
 </Project>
