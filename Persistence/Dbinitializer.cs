@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Persistence
 {
-    public static class Dbinitializer
+    public static class DbInitializer
     {
         public static void Initialize(ApplicationDbContext context)
         {
