@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Domain;
 using Microsoft.EntityFrameworkCore;
+using Persistence.EntityTypeConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new MaterialConfiguration());
+            builder.ApplyConfiguration(new SellerConfiguration());
             base.OnModelCreating(builder);
         }
     }

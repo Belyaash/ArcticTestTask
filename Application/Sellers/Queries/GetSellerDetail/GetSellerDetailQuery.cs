@@ -6,9 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Materials.Queries.GetMaterialList
+namespace Application.Sellers.Queries.GetSellerDetail
 {
-    public class GetMaterialListQuery: IRequest<List<Material>>
+    public class GetSellerDetailQuery : IRequest<Seller>
     {
+        public int Id { get; set; }
     }
 }

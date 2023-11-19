@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace Persistence
 {
-    internal class Dbinitializer
+    public static class Dbinitializer
     {
+        public static void Initialize(ApplicationDbContext context)
+        {
+            context.Database.EnsureCreated();
+        }
     }
 }

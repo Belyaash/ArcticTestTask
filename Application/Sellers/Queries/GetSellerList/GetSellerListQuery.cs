@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Materials.Queries.GetMaterialList
+namespace Application.Sellers.Queries.GetSellerList
 {
-    public class GetMaterialListQuery: IRequest<List<Material>>
+    public class GetSellerListQuery: IRequest<List<Seller>>
     {
     }
 }
