@@ -10,11 +10,22 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace WebApi.Controllers
 {
+
     [Route("api/[controller]")]
     public class HangfireController : BaseController
     {
+        /// <summary>
+        /// Starts cron than will change prices of every material at 8 AM every day
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /recurring
+        /// </remarks>
+        /// <returns>None</returns>
+        /// <response code="200">Success</response>
         [HttpPost]
         [Route("recurring")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Recurring()
         {
             var command = new RecurringUpdateMaterialsPricesCommand();

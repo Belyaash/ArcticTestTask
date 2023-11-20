@@ -26,6 +26,13 @@ namespace Notes.WebApi
                 
             builder.Services.AddHangfireServer();
 
+            builder.Services.AddSwaggerGen(config =>
+            {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                config.IncludeXmlComments(xmlPath);
+            });
+
             builder.Services.AddCors(
                 options =>
                 {
@@ -64,7 +71,13 @@ namespace Notes.WebApi
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
+            app.UseStaticFiles();
+            app.UseSwagger();
+            app.UseSwaggerUI(config =>
+            {
+                config.RoutePrefix = "swagger";
+                config.SwaggerEndpoint("v1/swagger.json", "API");
+            });
             app.UseHangfireDashboard("/hangfire");
             app.UseHttpsRedirection();
             app.UseCors("AllowAll");
