@@ -3,7 +3,10 @@ using System.ComponentModel;
 
 namespace WebApi.MediatRHangfireBridge
 {
-    public class MediatorHangfireBridge
+    /// <summary>
+    /// Class that allows use Mediator in hangfire methods  
+    /// </summary>
+    internal class MediatorHangfireBridge
     {
         private readonly IMediator _mediator;
 
@@ -13,12 +16,6 @@ namespace WebApi.MediatRHangfireBridge
         }
 
         public async Task Send(IRequest command)
-        {
-            await _mediator.Send(command);
-        }
-
-        [DisplayName("{0}")]
-        public async Task Send(string jobName, IRequest command)
         {
             await _mediator.Send(command);
         }

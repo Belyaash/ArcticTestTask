@@ -10,6 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
 {
+    /// <summary>
+    /// DependencyInjection for all frameworks in Persistence project
+    /// </summary>
     public static class DependencyInjection
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services,

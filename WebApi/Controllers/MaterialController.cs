@@ -9,6 +9,9 @@ using Application.Materials.Commands.DeleteMaterial;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// Controller for api interactions with Material table
+    /// </summary>
     [Produces("application/json")]
     [Route("api/[controller]")]
     public class MaterialController: BaseController

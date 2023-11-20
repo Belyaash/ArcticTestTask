@@ -10,6 +10,9 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// Controller for all hangfire Tasks
+    /// </summary>
 
     [Route("api/[controller]")]
     public class HangfireController : BaseController
@@ -29,7 +32,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> Recurring()
         {
             var command = new RecurringUpdateMaterialsPricesCommand();
-            Mediator.AddOrUpdate<Unit>(command, "0 8 * * *");
+            Mediator.AddOrUpdate(command, "0 8 * * *");
 
             return Ok();
         }

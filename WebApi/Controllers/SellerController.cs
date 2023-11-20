@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// Controller for api interactions with Sellers table
+    /// </summary>
     [Route("api/[controller]")]
     public class SellerController : BaseController
     {

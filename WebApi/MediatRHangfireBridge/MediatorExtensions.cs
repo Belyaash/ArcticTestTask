@@ -3,14 +3,11 @@ using MediatR;
 
 namespace WebApi.MediatRHangfireBridge
 {
-    public static class MediatorExtensions
+    /// <summary>
+    /// Contains methods of Hangfire that can spell by using Mediator."MethodName"
+    /// </summary>
+    internal static class MediatorExtensions
     {
-        public static void Enqueue(this IMediator mediator, string jobName, IRequest request)
-        {
-            var client = new BackgroundJobClient();
-            client.Enqueue<MediatorHangfireBridge>(bridge => bridge.Send(jobName, request));
-        }
-
         public static void Enqueue(this IMediator mediator, IRequest request)
         {
             var client = new BackgroundJobClient();

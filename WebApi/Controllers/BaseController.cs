@@ -3,6 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// Abstract class that allows to 
+    /// use Mediator for controller and 
+    /// creates route("api/[controller]/[action]")
+    /// </summary>
     [ApiController]
     [Route("api/[controller]/[action]")]
     public abstract class BaseController: ControllerBase

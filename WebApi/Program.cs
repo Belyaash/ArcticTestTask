@@ -15,9 +15,12 @@ namespace Notes.WebApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            //Adding mediatr and entityframework dependencyinjections
             builder.Services.AddApplication();
             builder.Services.AddPersistence(builder.Configuration);
+
             builder.Services.AddControllers();
+            //Adding hangfire with postgres connection and with custom usage of mediatr
             builder.Services.AddHangfire(x =>
             {
                 x.UsePostgreSqlStorage(builder.Configuration["DbConnection"]);
@@ -26,28 +29,16 @@ namespace Notes.WebApi
                 
             builder.Services.AddHangfireServer();
 
+            //Adding generation of xml documentation for swagger
             builder.Services.AddSwaggerGen(config =>
             {
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 config.IncludeXmlComments(xmlPath);
             });
-
-            builder.Services.AddCors(
-                options =>
-                {
-                    options.AddPolicy("AllowAll", policy =>
-                    {
-                        policy.AllowAnyHeader();
-                        policy.AllowAnyMethod();
-                        policy.AllowAnyOrigin();
-                    });
-                }
-            );
             
 
             var app = builder.Build();
-
             using (var scope = app.Services.CreateScope())
             {
                 var serviceProvider = scope.ServiceProvider;
@@ -71,6 +62,7 @@ namespace Notes.WebApi
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
             app.UseStaticFiles();
             app.UseSwagger();
             app.UseSwaggerUI(config =>
@@ -80,7 +72,6 @@ namespace Notes.WebApi
             });
             app.UseHangfireDashboard("/hangfire");
             app.UseHttpsRedirection();
-            app.UseCors("AllowAll");
             app.UseRouting();
             app.UseAuthorization();
             app.MapControllers();
