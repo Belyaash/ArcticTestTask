@@ -21,7 +21,7 @@ namespace Application.Materials.Queries.GetMaterialList
         public async Task<List<Material>> Handle(GetMaterialListQuery request,
             CancellationToken cancellationToken)
         {
-            return await _dbContext.Materials.ToListAsync();
+            return await _dbContext.Materials.ToListAsync(cancellationToken);
         }
     }
 }

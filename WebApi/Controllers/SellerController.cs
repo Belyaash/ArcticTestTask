@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class SellersController : BaseController
+    public class SellerController : BaseController
     {
 
         [HttpGet]

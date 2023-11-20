@@ -1,8 +1,12 @@
 using Application;
 using Application.Interfaces;
+using Hangfire;
+using Hangfire.PostgreSql;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Persistence;
 using System.Reflection;
+using WebApi.MediatRHangfireBridge;
 
 namespace Notes.WebApi
 {
@@ -14,6 +18,14 @@ namespace Notes.WebApi
             builder.Services.AddApplication();
             builder.Services.AddPersistence(builder.Configuration);
             builder.Services.AddControllers();
+            builder.Services.AddHangfire(x =>
+            {
+                x.UsePostgreSqlStorage(builder.Configuration["DbConnection"]);
+                x.UseMediatR(); 
+            });
+                
+            builder.Services.AddHangfireServer();
+
             builder.Services.AddCors(
                 options =>
                 {
@@ -53,6 +65,7 @@ namespace Notes.WebApi
                 app.UseHsts();
             }
 
+            app.UseHangfireDashboard("/hangfire");
             app.UseHttpsRedirection();
             app.UseCors("AllowAll");
             app.UseRouting();
